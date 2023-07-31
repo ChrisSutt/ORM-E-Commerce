@@ -63,23 +63,44 @@ const { Tag, Product, ProductTag } = require('../../models');
   // update a tag's name by its `id` value
   router.put('/:id', async (req, res) => {
     try {
-      const [rowsUpdated, [updatedTag]] = await Tag.update(req.body, {
-        where: {
-          id: req.params.id
-        },
-        returning: true
-      });
+      const existingTag = await Tag.findByPk(req.params.id);
   
-      if (rowsUpdated === 0) {
+      if (!existingTag) {
         return res.status(404).json({ message: 'No tag found with this id' });
       }
   
+      console.log('Request Body:', req.body);
+  
+      const [rowsUpdated] = await Tag.update(
+        {
+          tag_name: req.body.tag_name,
+        },
+        {
+          where: {
+            id: req.params.id,
+          },
+        }
+      );
+  
+      console.log('Rows Updated:', rowsUpdated);
+  
+      if (rowsUpdated === 0) {
+        return res.status(500).json({ message: 'Error updating the tag' });
+      }
+  
+      const updatedTag = await Tag.findByPk(req.params.id);
+  
+      console.log("Updated Tag:", updatedTag);
+  
       res.json(updatedTag);
     } catch (err) {
-      console.error(err);
-      res.status(500).json(err);
+      console.error("Error updating the tag:", err);
+      res.status(500).json({ message: 'Error updating the tag', error: err.message });
     }
   });
+  
+  
+  
   
   // delete on tag by its `id` value
   router.delete('/:id', async (req, res) => {
