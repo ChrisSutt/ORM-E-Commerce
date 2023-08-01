@@ -1,4 +1,4 @@
-# Employee Tracker
+# Ecommerce-BackEnd
 
 I've created a MYSQL DB for an e-commerce site's back end with MYSQL, .env, express and squalize
 
@@ -29,13 +29,13 @@ by typing $node server.js in your terminal.
 
 You will be able to view the route's on your localhost:3001/api/
 
-[Watch the video](https://clipchamp.com/watch/t3QNB92arQ4)
+[Watch the video](https://clipchamp.com/watch/1DkDZPUPtFJ)
 
 ##Screenshot
 
 <img
-  src="assets\employeeTracker.png"
-  alt="Employee-Tracker"
+  src="assets\images\eCom.png"
+  alt="Ecommerce-BackEnd"
   style="display: left; margin: 0 auto; max-width: 500px">
 
 ## Contributing
